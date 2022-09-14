@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LevSundt.Bmi.Application\LevSundt.Bmi.Application.csproj" />
+    <ProjectReference Include="..\LevSundt.Bmi.Domain\LevSundt.Bmi.Domain.csproj" />
+    <ProjectReference Include="..\LevSundt.Bmi.Infrastructor\LevSundt.Bmi.Infrastructor.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,3 +1,7 @@
+using LevSundt.Bmi.Application.Commands;
+using LevSundt.Bmi.Application.Commands.Impementation;
+using LevSundt.Bmi.Application.Repositories;
+using LevSundt.Bmi.Infrastructor.Repositories;
 using LevSundt.WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +17,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+// Clean Architecture
+builder.Services.AddScoped<ICreateBmiCommand, CreateBmiCommand>();
+builder.Services.AddScoped<IBmiRepository, BmiRepository>();
 
 var app = builder.Build();
 

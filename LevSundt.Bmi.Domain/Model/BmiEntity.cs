@@ -22,7 +22,7 @@ public class BmiEntity
 
     /// <summary>
     /// Acceptabel højde er [100; 250]
-    //  Acceptabel vægt et [40,0; 250,0]
+    ///  Acceptabel vægt et [40,0; 250,0]
     /// </summary>
     /// <returns></returns>
     protected bool IsValid()
