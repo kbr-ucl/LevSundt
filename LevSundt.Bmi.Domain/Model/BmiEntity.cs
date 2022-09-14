@@ -2,11 +2,12 @@
 
 public class BmiEntity
 {
-    public BmiEntity(double height, double weight)
+    public BmiEntity(double height, double weight, int id)
     {
         // Check pre-condition
         Height = height;
         Weight = weight;
+        Id = id;
 
         if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
 
@@ -16,6 +17,7 @@ public class BmiEntity
     public double Height { get; }
     public double Weight { get; }
     public double Bmi { get; private set; }
+    public int Id { get; private set; }
 
     /// <summary>
     /// Acceptabel højde er [100; 250]
