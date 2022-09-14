@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevSundt.WebApp", "LevSundt.WebApp\LevSundt.WebApp.csproj", "{70632F11-7DE8-4671-B9F9-65104996FF6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LevSundt.WebApp", "LevSundt.WebApp\LevSundt.WebApp.csproj", "{70632F11-7DE8-4671-B9F9-65104996FF6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{E31B3F2A-8E3C-49C7-8AE2-5E762D6E8220}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BMI", "BMI", "{9C248305-C482-4F0C-B420-C66EE0F67AC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevSundt.Bmi.Domain", "LevSundt.Bmi.Domain\LevSundt.Bmi.Domain.csproj", "{55645333-FD2B-4325-A5EA-8B632AECB78C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevSundt.Bmi.Domain.Test", "LevSundt.Bmi.Domain.Test\LevSundt.Bmi.Domain.Test.csproj", "{7B62B28A-80AE-4F16-A113-1B77E8362E82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +23,22 @@ Global
 		{70632F11-7DE8-4671-B9F9-65104996FF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70632F11-7DE8-4671-B9F9-65104996FF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70632F11-7DE8-4671-B9F9-65104996FF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55645333-FD2B-4325-A5EA-8B632AECB78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55645333-FD2B-4325-A5EA-8B632AECB78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55645333-FD2B-4325-A5EA-8B632AECB78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55645333-FD2B-4325-A5EA-8B632AECB78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B62B28A-80AE-4F16-A113-1B77E8362E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B62B28A-80AE-4F16-A113-1B77E8362E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B62B28A-80AE-4F16-A113-1B77E8362E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B62B28A-80AE-4F16-A113-1B77E8362E82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C248305-C482-4F0C-B420-C66EE0F67AC4} = {E31B3F2A-8E3C-49C7-8AE2-5E762D6E8220}
+		{55645333-FD2B-4325-A5EA-8B632AECB78C} = {9C248305-C482-4F0C-B420-C66EE0F67AC4}
+		{7B62B28A-80AE-4F16-A113-1B77E8362E82} = {9C248305-C482-4F0C-B420-C66EE0F67AC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5858C003-2B34-4246-8C05-B3C6781D29D1}
