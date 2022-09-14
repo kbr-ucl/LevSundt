@@ -29,7 +29,7 @@ namespace LevSundt.Bmi.Domain.Test.BmiEntityTests
 
         public class BmiEntityTest : BmiEntity
         {
-            public BmiEntityTest(double height, double weight) : base(height, weight)
+            public BmiEntityTest(double height, double weight) : base(height, weight, 1)
             {
             }
 
