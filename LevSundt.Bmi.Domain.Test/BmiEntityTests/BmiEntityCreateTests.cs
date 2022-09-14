@@ -16,7 +16,7 @@ public class BmiEntityCreateTests
         // Arrange
 
         // Act
-        var sut = new BmiEntity(height, 100, 1);
+        var sut = new BmiEntity(height, 100);
         // Assert
     }
 
@@ -33,7 +33,7 @@ public class BmiEntityCreateTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => new BmiEntity(height, 100, 1));
+        Assert.Throws<ArgumentException>(() => new BmiEntity(height, 100));
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class BmiEntityCreateTests
         // Arrange
 
         // Act
-        var sut = new BmiEntity(200, weight, 1) ;
+        var sut = new BmiEntity(200, weight);
         // Assert
     }
 
@@ -65,7 +65,7 @@ public class BmiEntityCreateTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => new BmiEntity(200, weight, 1));
+        Assert.Throws<ArgumentException>(() => new BmiEntity(200, weight));
     }
 
     [Theory]
@@ -76,7 +76,7 @@ public class BmiEntityCreateTests
         // Arrange
         
         // Act
-        var sut = new BmiEntity(height, wight, 1);
+        var sut = new BmiEntity(height, wight);
 
         // Assert
         Assert.Equal(exptected, Math.Round(sut.Bmi,1));
