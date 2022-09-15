@@ -1,0 +1,41 @@
+﻿@page
+@model LevSundt.WebApp.Pages.Bmi.IndexModel
+@{
+}
+
+<form method="post">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Højde</th>
+            <th>Vægt</th>
+            <th>BMI</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.IndexViewModel.Any())
+        {
+                foreach (var bmi in Model.IndexViewModel)
+            {
+                <tr>
+                    <td> @bmi.Id </td>
+                    <td>@bmi.Height</td>
+                    <td>@bmi.Weight</td>
+                    <td>@bmi.Bmi</td>
+                    <td>
+                        <!-- <snippet_Edit> -->
+@*                        <a asp-page="./Edit" asp-route-id="@bmi.Id">Edit</a> |*@
+                        <!-- </snippet_Edit> -->
+                        <!-- <snippet_Delete> -->
+@*                        <button type="submit" asp-page-handler="delete" asp-route-id="@bmi.Id">delete</button>*@
+                        <!-- </snippet_Delete> -->
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+    <a asp-page="Create">Create New</a>
+</form>
