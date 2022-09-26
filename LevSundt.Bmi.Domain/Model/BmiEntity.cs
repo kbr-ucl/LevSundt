@@ -15,10 +15,10 @@ public class BmiEntity
 
     }
 
-    public double Height { get; }
-    public double Weight { get; }
+    public double Height { get; private set; }
+    public double Weight { get; private set; }
     public double Bmi { get; private set; }
-    public int Id { get; private set; }
+    public int Id { get; }
 
     /// <summary>
     /// Acceptabel højde er [100; 250]
@@ -38,5 +38,15 @@ public class BmiEntity
     protected void CalculateBmi()
     {
         Bmi = Weight / (Height/100 * Height/100);
+    }
+
+    public void Edit(double weight, double height)
+    {
+        Height = height;
+        Weight = weight;
+
+        if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
+
+        CalculateBmi();
     }
 }

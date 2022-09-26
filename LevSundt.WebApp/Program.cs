@@ -24,6 +24,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICreateBmiCommand, CreateBmiCommand>();
 builder.Services.AddScoped<IBmiRepository, BmiRepository>();
 builder.Services.AddScoped<IBmiGetAllQuery, BmiGetAllQuery>();
+builder.Services.AddScoped<IEditBmiCommand, EditBmiCommand>();
+builder.Services.AddScoped<IBmiGetQuery, BmiGetQuery>();
+
 
 var app = builder.Build();
 

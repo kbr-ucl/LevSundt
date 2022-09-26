@@ -8,4 +8,7 @@ public interface IBmiRepository
     void Add(BmiEntity bmi);
     int GetNextKey();
     IEnumerable<BmiQueryResultDto> GetAll();
+    BmiEntity Load(int id);
+    void Update(BmiEntity model);
+    BmiQueryResultDto Get(int id);
 }

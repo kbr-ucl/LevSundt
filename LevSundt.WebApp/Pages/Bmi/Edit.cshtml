@@ -1,0 +1,24 @@
+﻿@page
+@model LevSundt.WebApp.Pages.Bmi.EditModel
+@{
+}
+<h2>Opret BMI måling</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <input type="hidden" asp-for="BmiModel.Id" class="form-control" />
+            <div class="form-group">
+                <label asp-for="BmiModel.Height"></label>
+                <input asp-for="BmiModel.Height" class="form-control"/>
+                <span asp-validation-for="BmiModel.Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BmiModel.Weight"></label>
+                <input asp-for="BmiModel.Weight" class="form-control"/>
+                <span asp-validation-for="BmiModel.Weight" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-default">Update Bmi</button>
+        </form>
+    </div>
+</div>
