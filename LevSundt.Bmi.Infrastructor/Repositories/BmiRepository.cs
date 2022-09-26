@@ -19,7 +19,7 @@ public class BmiRepository : IBmiRepository
     {
         foreach (var entity in _database.Values)
             yield return new BmiQueryResultDto
-                {Bmi = entity.Bmi, Weight = entity.Weight, Height = entity.Height, Id = entity.Id};
+                {Bmi = entity.Bmi, Weight = entity.Weight, Height = entity.Height, Id = entity.Id, Date = entity.Date};
     }
 
     int IBmiRepository.GetNextKey()
@@ -44,6 +44,6 @@ public class BmiRepository : IBmiRepository
     {
         var dbEnity = _database[id];
         return new BmiQueryResultDto
-            {Bmi = dbEnity.Bmi, Weight = dbEnity.Weight, Height = dbEnity.Height, Id = dbEnity.Id};
+            {Bmi = dbEnity.Bmi, Weight = dbEnity.Weight, Height = dbEnity.Height, Id = dbEnity.Id, Date = dbEnity.Date};
     }
 }

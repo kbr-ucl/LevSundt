@@ -16,7 +16,7 @@ public class BmiEntity
         Date = DateTime.Now;
 
         if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
-
+        if(_domainService.BmiExsistsOnDate(Date.Date)) throw new ArgumentException("Der eksisterer allerede en BMI måling for i dag");
         CalculateBmi();
 
     }
@@ -38,7 +38,6 @@ public class BmiEntity
         if (Height > 250) return false;
         if (Weight < 40) return false;
         if (Weight > 250) return false;
-        if(_domainService.BmiExsistsOnDate(Date.Date)) return false;
 
         return true;
     }
