@@ -3,6 +3,8 @@ using LevSundt.Bmi.Application.Commands.Impementation;
 using LevSundt.Bmi.Application.Queries;
 using LevSundt.Bmi.Application.Queries.Impementation;
 using LevSundt.Bmi.Application.Repositories;
+using LevSundt.Bmi.Domain.DomainServices;
+using LevSundt.Bmi.Infrastructor.DomainServices;
 using LevSundt.Bmi.Infrastructor.Repositories;
 using LevSundt.WebApp.Data;
 using Microsoft.AspNetCore.Identity;
@@ -26,6 +28,7 @@ builder.Services.AddScoped<IBmiRepository, BmiRepository>();
 builder.Services.AddScoped<IBmiGetAllQuery, BmiGetAllQuery>();
 builder.Services.AddScoped<IEditBmiCommand, EditBmiCommand>();
 builder.Services.AddScoped<IBmiGetQuery, BmiGetQuery>();
+builder.Services.AddScoped<IBmiDomainService, BmiDomainService>();
 
 
 var app = builder.Build();

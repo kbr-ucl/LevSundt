@@ -1,13 +1,19 @@
-﻿namespace LevSundt.Bmi.Domain.Model;
+﻿using LevSundt.Bmi.Domain.DomainServices;
+
+namespace LevSundt.Bmi.Domain.Model;
 
 public class BmiEntity
 {
-    public BmiEntity(double height, double weight, int id)
+    private readonly IBmiDomainService _domainService;
+
+    public BmiEntity(IBmiDomainService domainService, double height, double weight, int id)
     {
+        _domainService = domainService;
         // Check pre-condition
         Height = height;
         Weight = weight;
         Id = id;
+        Date = DateTime.Now;
 
         if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
 
@@ -18,6 +24,7 @@ public class BmiEntity
     public double Height { get; private set; }
     public double Weight { get; private set; }
     public double Bmi { get; private set; }
+    public DateTime Date { get; }
     public int Id { get; }
 
     /// <summary>
@@ -31,6 +38,7 @@ public class BmiEntity
         if (Height > 250) return false;
         if (Weight < 40) return false;
         if (Weight > 250) return false;
+        if(_domainService.BmiExsistsOnDate(Date.Date)) return false;
 
         return true;
     }
