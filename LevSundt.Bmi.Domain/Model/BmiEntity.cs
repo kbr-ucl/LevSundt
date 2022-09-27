@@ -12,13 +12,12 @@ public class BmiEntity
         
     }
 
-    public BmiEntity(IBmiDomainService domainService, double height, double weight, int id)
+    public BmiEntity(IBmiDomainService domainService, double height, double weight)
     {
         _domainService = domainService;
         // Check pre-condition
         Height = height;
         Weight = weight;
-        Id = id;
         Date = DateTime.Now;
 
         if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
@@ -30,7 +29,7 @@ public class BmiEntity
     public double Height { get; private set; }
     public double Weight { get; private set; }
     public double Bmi { get; private set; }
-    public DateTime Date { get; }
+    public DateTime Date { get; private set;}
     public int Id { get; }
 
     /// <summary>

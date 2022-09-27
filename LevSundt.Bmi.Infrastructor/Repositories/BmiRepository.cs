@@ -1,49 +1,55 @@
 ﻿using LevSundt.Bmi.Application.Queries;
 using LevSundt.Bmi.Application.Repositories;
 using LevSundt.Bmi.Domain.Model;
+using LevSundt.SqlServerContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace LevSundt.Bmi.Infrastructor.Repositories;
 
 public class BmiRepository : IBmiRepository
 {
-    public static readonly Dictionary<int, BmiEntity> _database = new();
+    private readonly LevSundtContext _db;
+
+    public BmiRepository(LevSundtContext db)
+    {
+        _db = db;
+    }
 
     void IBmiRepository.Add(BmiEntity bmi)
     {
-        _database.Add(bmi.Id, bmi);
+        _db.Add(bmi);
+        _db.SaveChanges();
     }
 
 
 
     IEnumerable<BmiQueryResultDto> IBmiRepository.GetAll()
     {
-        foreach (var entity in _database.Values)
+        foreach (var entity in _db.BmiEntities.AsNoTracking().ToList())
             yield return new BmiQueryResultDto
                 {Bmi = entity.Bmi, Weight = entity.Weight, Height = entity.Height, Id = entity.Id, Date = entity.Date};
     }
 
-    int IBmiRepository.GetNextKey()
+    void IBmiRepository.Update()
     {
-        if (!_database.Keys.Any()) return 1;
-
-        return _database.Keys.Max() + 1;
-    }
-
-    void IBmiRepository.Update(BmiEntity model)
-    {
-        _database[model.Id] = model;
-        
+        //_db.Update(model);
+        _db.SaveChanges(); 
     }
 
     BmiEntity IBmiRepository.Load(int id)
     {
-        return _database[id];
+        var dbEntity = _db.BmiEntities.FirstOrDefault(a => a.Id == id);
+        if(dbEntity == null) throw new Exception("Bmi måling findes ikke i databasen");
+
+        return dbEntity;
     }
 
     BmiQueryResultDto IBmiRepository.Get(int id)
     {
-        var dbEnity = _database[id];
+        var dbEntity = _db.BmiEntities.AsNoTracking().FirstOrDefault(a => a.Id == id);
+        if(dbEntity == null) throw new Exception("Bmi måling findes ikke i databasen");
+
         return new BmiQueryResultDto
-            {Bmi = dbEnity.Bmi, Weight = dbEnity.Weight, Height = dbEnity.Height, Id = dbEnity.Id, Date = dbEnity.Date};
+            {Bmi = dbEntity.Bmi, Weight = dbEntity.Weight, Height = dbEntity.Height, Id = dbEntity.Id, Date = dbEntity.Date};
     }
 }

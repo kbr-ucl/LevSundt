@@ -32,7 +32,7 @@ namespace LevSundt.Bmi.Domain.Test.BmiEntityTests
 
         public class BmiEntityTest : BmiEntity
         {
-            public BmiEntityTest(IBmiDomainService domainService, double height, double weight) : base(domainService, height, weight, 1)
+            public BmiEntityTest(IBmiDomainService domainService, double height, double weight) : base(domainService, height, weight)
             {
             }
 

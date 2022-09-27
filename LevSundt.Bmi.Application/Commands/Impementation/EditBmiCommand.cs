@@ -19,6 +19,6 @@ public class EditBmiCommand : IEditBmiCommand
         model.Edit(requestDto.Weight, requestDto.Height);
 
         // Save
-        _repository.Update(model);
+        _repository.Update();
     }
 }

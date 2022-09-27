@@ -18,5 +18,9 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\LevSundt.SqlServerContext\LevSundt.SqlServerContext.csproj" />
 	</ItemGroup>
+  
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	</ItemGroup>
 	
 </Project>

@@ -16,8 +16,7 @@ public class CreateBmiCommand : ICreateBmiCommand
     }
     void ICreateBmiCommand.Create(BmiCreateRequestDto bmiCreateRequestDto)
     {
-        var id = _bmiRepository.GetNextKey();
-        var bmi = new BmiEntity(_domainService, bmiCreateRequestDto.Height, bmiCreateRequestDto.Weight, id);
+        var bmi = new BmiEntity(_domainService, bmiCreateRequestDto.Height, bmiCreateRequestDto.Weight);
         _bmiRepository.Add(bmi);
     }
 }
