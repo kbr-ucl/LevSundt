@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LevSundt.Bmi.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LevSundt.Bmi.Infrastructor", "LevSundt.Bmi.Infrastructor\LevSundt.Bmi.Infrastructor.csproj", "{D99363BE-2358-4F9D-81B4-7D0B0E30F82F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevSundt.SqlServerContext", "LevSundt.SqlServerContext\LevSundt.SqlServerContext.csproj", "{08A34DA6-7821-4C3A-BE96-08647C982C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevSundt.SqlServerContext.Migrations", "LevSundt.SqlServerContext.Migrations\LevSundt.SqlServerContext.Migrations.csproj", "{B091FDB9-AEB3-44C6-8679-1B37FD133DDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,14 @@ Global
 		{D99363BE-2358-4F9D-81B4-7D0B0E30F82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D99363BE-2358-4F9D-81B4-7D0B0E30F82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D99363BE-2358-4F9D-81B4-7D0B0E30F82F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A34DA6-7821-4C3A-BE96-08647C982C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A34DA6-7821-4C3A-BE96-08647C982C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A34DA6-7821-4C3A-BE96-08647C982C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A34DA6-7821-4C3A-BE96-08647C982C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B091FDB9-AEB3-44C6-8679-1B37FD133DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B091FDB9-AEB3-44C6-8679-1B37FD133DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B091FDB9-AEB3-44C6-8679-1B37FD133DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B091FDB9-AEB3-44C6-8679-1B37FD133DDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

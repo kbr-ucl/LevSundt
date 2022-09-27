@@ -6,6 +6,12 @@ public class BmiEntity
 {
     private readonly IBmiDomainService _domainService;
 
+    // For Entity Framework only!!!
+    internal BmiEntity()
+    {
+        
+    }
+
     public BmiEntity(IBmiDomainService domainService, double height, double weight, int id)
     {
         _domainService = domainService;

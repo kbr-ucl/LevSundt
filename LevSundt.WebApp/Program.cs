@@ -6,6 +6,7 @@ using LevSundt.Bmi.Application.Repositories;
 using LevSundt.Bmi.Domain.DomainServices;
 using LevSundt.Bmi.Infrastructor.DomainServices;
 using LevSundt.Bmi.Infrastructor.Repositories;
+using LevSundt.SqlServerContext;
 using LevSundt.WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,13 @@ builder.Services.AddScoped<IEditBmiCommand, EditBmiCommand>();
 builder.Services.AddScoped<IBmiGetQuery, BmiGetQuery>();
 builder.Services.AddScoped<IBmiDomainService, BmiDomainService>();
 
+// Database
+// Add-Migration InitialMigration -Context LevSundtContext -Project LevSundt.SqlServerContext.Migrations
+// Update-Database -Context LevSundtContext
+builder.Services.AddDbContext<LevSundtContext>(
+    options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LevSundtDbConnection"),
+    x=> x.MigrationsAssembly("LevSundt.SqlServerContext.Migrations")));
 
 var app = builder.Build();
 
