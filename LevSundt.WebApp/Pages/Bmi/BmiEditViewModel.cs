@@ -13,5 +13,7 @@ namespace LevSundt.WebApp.Pages.Bmi
         public int Id { get; set; }
 
         public DateTime Date { get; set;}
+
+        public byte[] RowVersion { get; set; }
     }
 }

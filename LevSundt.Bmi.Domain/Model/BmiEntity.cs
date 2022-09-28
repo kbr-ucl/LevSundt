@@ -1,4 +1,5 @@
-﻿using LevSundt.Bmi.Domain.DomainServices;
+﻿using System.ComponentModel.DataAnnotations;
+using LevSundt.Bmi.Domain.DomainServices;
 
 namespace LevSundt.Bmi.Domain.Model;
 
@@ -32,6 +33,9 @@ public class BmiEntity
     public DateTime Date { get; private set;}
     public int Id { get; }
 
+    [Timestamp]
+    public byte[] RowVersion { get; private set; }
+
     /// <summary>
     /// Acceptabel højde er [100; 250]
     ///  Acceptabel vægt et [40,0; 250,0]
@@ -52,10 +56,11 @@ public class BmiEntity
         Bmi = Weight / (Height/100 * Height/100);
     }
 
-    public void Edit(double weight, double height)
+    public void Edit(double weight, double height, byte[] rowVersion)
     {
         Height = height;
         Weight = weight;
+        RowVersion = rowVersion;
 
         if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
 

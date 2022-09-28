@@ -27,18 +27,18 @@ public class BmiRepository : IBmiRepository
     {
         foreach (var entity in _db.BmiEntities.AsNoTracking().ToList())
             yield return new BmiQueryResultDto
-                {Bmi = entity.Bmi, Weight = entity.Weight, Height = entity.Height, Id = entity.Id, Date = entity.Date};
+                {Bmi = entity.Bmi, Weight = entity.Weight, Height = entity.Height, Id = entity.Id, Date = entity.Date, RowVersion = entity.RowVersion};
     }
 
-    void IBmiRepository.Update()
+    void IBmiRepository.Update(BmiEntity model)
     {
-        //_db.Update(model);
+        _db.Update(model);
         _db.SaveChanges(); 
     }
 
     BmiEntity IBmiRepository.Load(int id)
     {
-        var dbEntity = _db.BmiEntities.FirstOrDefault(a => a.Id == id);
+        var dbEntity = _db.BmiEntities.AsNoTracking().FirstOrDefault(a => a.Id == id);
         if(dbEntity == null) throw new Exception("Bmi måling findes ikke i databasen");
 
         return dbEntity;
@@ -50,6 +50,6 @@ public class BmiRepository : IBmiRepository
         if(dbEntity == null) throw new Exception("Bmi måling findes ikke i databasen");
 
         return new BmiQueryResultDto
-            {Bmi = dbEntity.Bmi, Weight = dbEntity.Weight, Height = dbEntity.Height, Id = dbEntity.Id, Date = dbEntity.Date};
+            {Bmi = dbEntity.Bmi, Weight = dbEntity.Weight, Height = dbEntity.Height, Id = dbEntity.Id, Date = dbEntity.Date, RowVersion = dbEntity.RowVersion};
     }
 }

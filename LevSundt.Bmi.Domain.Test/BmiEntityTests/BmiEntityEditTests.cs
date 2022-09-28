@@ -19,7 +19,7 @@ public class BmiEntityEditTests
         var mock = new Mock<IBmiDomainService>();
         var sut = new BmiEntity(mock.Object, 180, 80);
         // Act
-        sut.Edit(wight, height);
+        sut.Edit(wight, height, null);
 
         // Assert
         Assert.Equal(height, sut.Height);
@@ -41,7 +41,7 @@ public class BmiEntityEditTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => sut.Edit(height, 80));
+        Assert.Throws<ArgumentException>(() => sut.Edit(height, 80, null));
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class BmiEntityEditTests
         var mock = new Mock<IBmiDomainService>();
         var sut = new BmiEntity(mock.Object,180, 80);
         // Act
-        sut.Edit(wight, height);
+        sut.Edit(wight, height, null);
 
         // Assert
         Assert.Equal(height, sut.Height);
@@ -79,7 +79,7 @@ public class BmiEntityEditTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => sut.Edit(weight, 80));
+        Assert.Throws<ArgumentException>(() => sut.Edit(weight, 80, null));
 
     }
 }
