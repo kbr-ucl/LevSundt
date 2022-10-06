@@ -6,8 +6,8 @@ namespace LevSundt.Bmi.Application.Repositories;
 public interface IBmiRepository
 {
     void Add(BmiEntity bmi);
-    IEnumerable<BmiQueryResultDto> GetAll();
-    BmiEntity Load(int id);
+    IEnumerable<BmiQueryResultDto> GetAll(string userId);
+    BmiEntity Load(int id, string userId);
     void Update(BmiEntity model);
-    BmiQueryResultDto Get(int id);
+    BmiQueryResultDto Get(int id, string userId);
 }

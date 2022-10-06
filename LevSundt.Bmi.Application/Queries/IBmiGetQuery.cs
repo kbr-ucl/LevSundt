@@ -2,6 +2,6 @@
 {
     public interface IBmiGetQuery
     {
-        BmiQueryResultDto Get(int id);
+        BmiQueryResultDto Get(int id, string userId);
     }
 }

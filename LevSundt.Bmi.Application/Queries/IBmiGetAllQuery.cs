@@ -2,6 +2,6 @@
 {
     public interface IBmiGetAllQuery
     {
-        IEnumerable<BmiQueryResultDto> GetAll();
+        IEnumerable<BmiQueryResultDto> GetAll(string userId);
     }
 }

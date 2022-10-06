@@ -13,7 +13,7 @@ public class EditBmiCommand : IEditBmiCommand
     void IEditBmiCommand.Edit(BmiEditRequestDto requestDto)
     {
         // Read
-        var model = _repository.Load(requestDto.Id);
+        var model = _repository.Load(requestDto.Id, requestDto.UserId);
         // DoIt
 
         model.Edit(requestDto.Weight, requestDto.Height, requestDto.RowVersion);

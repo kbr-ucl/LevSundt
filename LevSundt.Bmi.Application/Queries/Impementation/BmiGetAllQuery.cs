@@ -15,9 +15,9 @@ namespace LevSundt.Bmi.Application.Queries.Impementation
         {
             _repository = repository;
         }
-        IEnumerable<BmiQueryResultDto> IBmiGetAllQuery.GetAll()
+        IEnumerable<BmiQueryResultDto> IBmiGetAllQuery.GetAll(string userId)
         {
-            return _repository.GetAll();
+            return _repository.GetAll(userId);
         }
     }
 }

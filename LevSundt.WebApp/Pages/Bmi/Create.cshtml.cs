@@ -24,7 +24,7 @@ namespace LevSundt.WebApp.Pages.Bmi
         {
             if (!ModelState.IsValid) return Page();
 
-            var dto = new BmiCreateRequestDto{Height = BmiModel.Height.Value, Weight = BmiModel.Weight.Value};
+            var dto = new BmiCreateRequestDto{Height = BmiModel.Height.Value, Weight = BmiModel.Weight.Value, UserId = User.Identity?.Name ?? String.Empty};
             _createBmiCommand.Create(dto);
 
             return new RedirectToPageResult("/Bmi/Index");

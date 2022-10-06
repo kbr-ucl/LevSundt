@@ -19,7 +19,7 @@ public class BmiEntityCreateTests
         var mock = new Mock<IBmiDomainService>();
 
         // Act
-        var sut = new BmiEntity(mock.Object,height, 100);
+        var sut = new BmiEntity(mock.Object,height, 100, "");
 
         // Assert
     }
@@ -38,7 +38,7 @@ public class BmiEntityCreateTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => new BmiEntity(mock.Object,height, 100));
+        Assert.Throws<ArgumentException>(() => new BmiEntity(mock.Object,height, 100, ""));
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ public class BmiEntityCreateTests
         // Arrange
         var mock = new Mock<IBmiDomainService>();
         // Act
-        var sut = new BmiEntity(mock.Object,200, weight);
+        var sut = new BmiEntity(mock.Object,200, weight, "");
         // Assert
     }
 
@@ -71,7 +71,7 @@ public class BmiEntityCreateTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => new BmiEntity(mock.Object,200, weight));
+        Assert.Throws<ArgumentException>(() => new BmiEntity(mock.Object,200, weight, ""));
     }
 
     [Theory]
@@ -83,7 +83,7 @@ public class BmiEntityCreateTests
         var mock = new Mock<IBmiDomainService>();
 
         // Act
-        var sut = new BmiEntity(mock.Object,height, wight);
+        var sut = new BmiEntity(mock.Object,height, wight, "");
 
         // Assert
         Assert.Equal(exptected, Math.Round(sut.Bmi,1));
@@ -99,7 +99,7 @@ public class BmiEntityCreateTests
         mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>())).Returns(false);
 
         // Act
-        var sut = new BmiEntity(mock.Object,100, 100);
+        var sut = new BmiEntity(mock.Object,100, 100, "");
 
         // Assert
     }
@@ -116,6 +116,6 @@ public class BmiEntityCreateTests
         // Act
 
         // Assert
-        Assert.Throws<ArgumentException>(() => new BmiEntity(mock.Object,100, 100));
+        Assert.Throws<ArgumentException>(() => new BmiEntity(mock.Object,100, 100, ""));
     }
 }

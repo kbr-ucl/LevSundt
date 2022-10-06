@@ -22,7 +22,7 @@ namespace LevSundt.WebApp.Pages.Bmi
         {
             if (id == null) return NotFound();
 
-            var dto = _query.Get(id.Value);
+            var dto = _query.Get(id.Value, User.Identity?.Name ?? String.Empty);
 
             BmiModel = new BmiEditViewModel {Height = dto.Height, Weight = dto.Weight, Id = dto.Id, Date = dto.Date, RowVersion = dto.RowVersion};
 
@@ -33,7 +33,7 @@ namespace LevSundt.WebApp.Pages.Bmi
         {
             if (!ModelState.IsValid) return Page();
 
-            _command.Edit(new BmiEditRequestDto{Height = BmiModel.Height, Weight = BmiModel.Weight, Id = BmiModel.Id, Date = BmiModel.Date, RowVersion = BmiModel.RowVersion});
+            _command.Edit(new BmiEditRequestDto{Height = BmiModel.Height, Weight = BmiModel.Weight, Id = BmiModel.Id, Date = BmiModel.Date, RowVersion = BmiModel.RowVersion, UserId = User.Identity?.Name ?? String.Empty});
 
             return RedirectToPage("./Index");
         }
