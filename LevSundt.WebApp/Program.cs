@@ -7,20 +7,32 @@ using LevSundt.Bmi.Domain.DomainServices;
 using LevSundt.Bmi.Infrastructor.DomainServices;
 using LevSundt.Bmi.Infrastructor.Repositories;
 using LevSundt.SqlServerContext;
-using LevSundt.WebApp.Data;
+using LevSundt.WebApp.UserContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+// Add-Migration InitialMigration -Context WebAppUserDbContext -Project LevSundt.WebApp.UserContext.Migrations
+// Update-Database -Context WebAppUserDbContext
+var connectionString = builder.Configuration.GetConnectionString("WebAppUserDbConnection");
+builder.Services.AddDbContext<WebAppUserDbContext>(options =>
+    options.UseSqlServer(connectionString,
+        x=> x.MigrationsAssembly("LevSundt.WebApp.UserContext.Migrations")));
+// builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    {
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 5;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+        options.SignIn.RequireConfirmedAccount = false;
+    })
+    .AddEntityFrameworkStores<WebAppUserDbContext>();
 builder.Services.AddRazorPages();
 
 // Clean Architecture
@@ -44,7 +56,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    // app.UseMigrationsEndPoint();
 }
 else
 {
