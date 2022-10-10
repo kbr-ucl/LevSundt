@@ -23,7 +23,7 @@ public class BmiEntity
         UserId = userId;
 
         if (!IsValid()) throw new ArgumentException("Pre-conditions er ikke overholdt");
-        if(_domainService.BmiExsistsOnDate(Date.Date)) throw new ArgumentException("Der eksisterer allerede en BMI måling for i dag");
+        if(_domainService.BmiExsistsOnDate(Date.Date, userId)) throw new ArgumentException("Der eksisterer allerede en BMI måling for i dag");
         CalculateBmi();
 
     }

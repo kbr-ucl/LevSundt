@@ -14,8 +14,8 @@ public class BmiDomainService : IBmiDomainService
         _db = db;
     }
 
-    bool IBmiDomainService.BmiExsistsOnDate(DateTime date)
+    bool IBmiDomainService.BmiExsistsOnDate(DateTime date, string userId)
     {
-        return _db.BmiEntities.AsNoTracking().ToList().Any(a => a.Date.Date == date.Date);
+        return _db.BmiEntities.AsNoTracking().ToList().Any(a => a.Date.Date == date.Date && a.UserId == userId);
     }
 }
