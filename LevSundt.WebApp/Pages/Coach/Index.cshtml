@@ -1,0 +1,24 @@
+﻿@page
+@model LevSundt.WebApp.Pages.Coach.IndexModel
+<table class="table">
+    <thead>
+    <tr>
+        <th>Bruger</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Users.Any())
+    {
+        foreach (var user in Model.Users)
+        {
+            <tr>
+                <th>@user.UserId</th>
+                <th>
+                    <a asp-page="./Details" asp-route-userId="@user.UserId">Bmi målinger</a>
+                </th>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

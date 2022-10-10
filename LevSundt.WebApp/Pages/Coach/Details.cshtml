@@ -1,0 +1,29 @@
+﻿@page
+@model LevSundt.WebApp.Pages.Coach.DetailsModel
+<h3>BMI målinger for @Model.UserName: </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Dato</th>
+            <th>Højde</th>
+            <th>Vægt</th>
+            <th>BMI</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.DetailsViewModel.Any())
+        {
+            foreach (var bmi in Model.DetailsViewModel)
+            {
+                <tr>
+                    <td> @bmi.Id </td>
+                    <td> @bmi.Date </td>
+                    <td>@bmi.Height</td>
+                    <td>@bmi.Weight</td>
+                    <td>@bmi.Bmi</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

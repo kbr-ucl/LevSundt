@@ -33,7 +33,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
         options.SignIn.RequireConfirmedAccount = false;
     })
     .AddEntityFrameworkStores<WebAppUserDbContext>();
-builder.Services.AddRazorPages();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CoachPolicy", policyBuilder => policyBuilder.RequireClaim("Coach"));
+});
+
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Bmi");
+    options.Conventions.AuthorizeFolder("/Coach", "CoachPolicy");
+});
 
 // Clean Architecture
 builder.Services.AddScoped<ICreateBmiCommand, CreateBmiCommand>();
