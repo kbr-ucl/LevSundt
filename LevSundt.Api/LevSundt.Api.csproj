@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>52b41dac-cbdb-4a66-a08f-48c1b86d72d7</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LevSundt.Bmi.Application\LevSundt.Bmi.Application.csproj" />
+		<ProjectReference Include="..\LevSundt.Bmi.Domain\LevSundt.Bmi.Domain.csproj" />
+		<ProjectReference Include="..\LevSundt.Bmi.Infrastructor\LevSundt.Bmi.Infrastructor.csproj" />
+		<ProjectReference Include="..\LevSundt.SqlServerContext.Migrations\LevSundt.SqlServerContext.Migrations.csproj" />
+		<ProjectReference Include="..\LevSundt.SqlServerContext\LevSundt.SqlServerContext.csproj" />
+		<ProjectReference Include="..\LevSundt.WebApp.UserContext.Migrations\LevSundt.WebApp.UserContext.Migrations.csproj" />
+		<ProjectReference Include="..\LevSundt.WebApp.UserContext\LevSundt.WebApp.UserContext.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -34,7 +34,7 @@ public class BmiEntityCreateTests
     {
         // Arrange
         var mock = new Mock<IBmiDomainService>();
-        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>())).Returns(false);
+        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>(), It.IsAny<string>())).Returns(false);
         // Act
 
         // Assert
@@ -67,7 +67,7 @@ public class BmiEntityCreateTests
     {
         // Arrange
         var mock = new Mock<IBmiDomainService>();
-        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>())).Returns(false);
+        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>(),It.IsAny<string>())).Returns(false);
         // Act
 
         // Assert
@@ -96,7 +96,7 @@ public class BmiEntityCreateTests
     {
         // Arrange
         var mock = new Mock<IBmiDomainService>();
-        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>())).Returns(false);
+        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>(), It.IsAny<string>())).Returns(false);
 
         // Act
         var sut = new BmiEntity(mock.Object,100, 100, "");
@@ -112,7 +112,7 @@ public class BmiEntityCreateTests
     {
         // Arrange
         var mock = new Mock<IBmiDomainService>();
-        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>())).Returns(true);
+        mock.Setup(m => m.BmiExsistsOnDate(It.IsAny<DateTime>(), It.IsAny<string>())).Returns(true);
         // Act
 
         // Assert
