@@ -1,33 +1,35 @@
-using LevSundt.Bmi.Application.Commands;
+using LevSundt.WebApp.Infrastructure.Contract;
+using LevSundt.WebApp.Infrastructure.Contract.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LevSundt.WebApp.Pages.Bmi
+namespace LevSundt.WebApp.Pages.Bmi;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly ILevSundtService _levSundtService;
+
+    public CreateModel(ILevSundtService levSundtService)
     {
-        private readonly ICreateBmiCommand _createBmiCommand;
+        _levSundtService = levSundtService;
+    }
 
-        public CreateModel(ICreateBmiCommand createBmiCommand)
+    [BindProperty] public BmiCreateViewModel BmiModel { get; set; } = new();
+
+    public void OnGet()
+    {
+    }
+
+    public async Task<IActionResult> OnPost()
+    {
+        if (!ModelState.IsValid) return Page();
+
+        var dto = new BmiCreateRequestDto
         {
-            _createBmiCommand = createBmiCommand;
-        }
+            Height = BmiModel.Height.Value, Weight = BmiModel.Weight.Value, UserId = User.Identity?.Name ?? string.Empty
+        };
+        await _levSundtService.Create(dto);
 
-        [BindProperty]
-        public BmiCreateViewModel BmiModel { get; set; } = new();
-
-        public void OnGet()
-        {
-        }
-
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid) return Page();
-
-            var dto = new BmiCreateRequestDto{Height = BmiModel.Height.Value, Weight = BmiModel.Weight.Value, UserId = User.Identity?.Name ?? String.Empty};
-            _createBmiCommand.Create(dto);
-
-            return new RedirectToPageResult("/Bmi/Index");
-        }
+        return new RedirectToPageResult("/Bmi/Index");
     }
 }

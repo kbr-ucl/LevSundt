@@ -1,4 +1,4 @@
-using LevSundt.Bmi.Application.Queries;
+using LevSundt.WebApp.Infrastructure.Contract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,25 +6,20 @@ namespace LevSundt.WebApp.Pages.Bmi;
 
 public class IndexModel : PageModel
 {
-    private readonly IBmiGetAllQuery _bmiGetAllQuery;
+    private readonly ILevSundtService _levSundtService;
 
-    public IndexModel(IBmiGetAllQuery bmiGetAllQuery)
+    public IndexModel(ILevSundtService levSundtService)
     {
-        _bmiGetAllQuery = bmiGetAllQuery;
+        _levSundtService = levSundtService;
     }
 
     [BindProperty] public List<BmiIndexViewModel> IndexViewModel { get; set; } = new();
 
-    public void OnGet()
+    public async Task OnGet()
     {
-        var businessModel = _bmiGetAllQuery.GetAll(User.Identity?.Name ?? String.Empty);
+        var businessModel = await _levSundtService.GetAll(User.Identity?.Name ?? string.Empty);
 
-        //foreach (var dto in businessModel)
-        //{
-        //    IndexViewModel.Add(new BmiIndexViewModel{Bmi = dto.Bmi, Weight = dto.Weight, Height = dto.Height, Id = dto.Id});
-        //}
-
-        businessModel.ToList().ForEach(dto => IndexViewModel.Add(new BmiIndexViewModel{Bmi = dto.Bmi, Weight = dto.Weight, Height = dto.Height, Id = dto.Id, Date = dto.Date}));
-
+        businessModel.ToList().ForEach(dto => IndexViewModel.Add(new BmiIndexViewModel
+            {Bmi = dto.Bmi, Weight = dto.Weight, Height = dto.Height, Id = dto.Id, Date = dto.Date}));
     }
 }
