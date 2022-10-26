@@ -1,4 +1,5 @@
-using LevSundt.Bmi.Application.Commands;
+using LevSundt.WebApp.Infrastructure.Contracts;
+using LevSundt.WebApp.Infrastructure.Contracts.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,11 +7,11 @@ namespace LevSundt.WebApp.Pages.Bmi
 {
     public class CreateModel : PageModel
     {
-        private readonly ICreateBmiCommand _createBmiCommand;
+        private readonly ILevSundtService _levSundtService;
 
-        public CreateModel(ICreateBmiCommand createBmiCommand)
+        public CreateModel(ILevSundtService levSundtService)
         {
-            _createBmiCommand = createBmiCommand;
+            _levSundtService = levSundtService;
         }
 
         [BindProperty]
@@ -20,12 +21,12 @@ namespace LevSundt.WebApp.Pages.Bmi
         {
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid) return Page();
 
             var dto = new BmiCreateRequestDto{Height = BmiModel.Height.Value, Weight = BmiModel.Weight.Value, UserId = User.Identity?.Name ?? String.Empty};
-            _createBmiCommand.Create(dto);
+            await _levSundtService.Create(dto);
 
             return new RedirectToPageResult("/Bmi/Index");
         }

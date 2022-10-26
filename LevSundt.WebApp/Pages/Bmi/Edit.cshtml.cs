@@ -1,41 +1,38 @@
-using LevSundt.Bmi.Application.Commands;
-using LevSundt.Bmi.Application.Queries;
+using LevSundt.WebApp.Infrastructure.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LevSundt.WebApp.Pages.Bmi
+namespace LevSundt.WebApp.Pages.Bmi;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    private readonly ILevSundtService _levSundtService;
+
+    public EditModel(ILevSundtService levSundtService)
     {
-        private readonly IEditBmiCommand _command;
-        private readonly IBmiGetQuery _query;
+        _levSundtService = levSundtService;
+    }
 
-        public EditModel(IEditBmiCommand command, IBmiGetQuery query)
-        {
-            _command = command;
-            _query = query;
-        }
+    [BindProperty] public BmiEditViewModel BmiModel { get; set; }
 
-        [BindProperty]
-        public BmiEditViewModel BmiModel { get; set; }
-        public IActionResult OnGet(int? id)
-        {
-            if (id == null) return NotFound();
+    public async Task <IActionResult> OnGet(int? id)
+    {
+        if (id == null) return NotFound();
 
-            var dto = _query.Get(id.Value, User.Identity?.Name ?? String.Empty);
+        var dto = await _levSundtService.Get(id.Value, User.Identity?.Name ?? string.Empty);
 
-            BmiModel = new BmiEditViewModel {Height = dto.Height, Weight = dto.Weight, Id = dto.Id, Date = dto.Date, RowVersion = dto.RowVersion};
+        BmiModel = new BmiEditViewModel
+            {Height = dto.Height, Weight = dto.Weight, Id = dto.Id, Date = dto.Date, RowVersion = dto.RowVersion};
 
-            return Page();
-        }
+        return Page();
+    }
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid) return Page();
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid) return Page();
 
-            _command.Edit(new BmiEditRequestDto{Height = BmiModel.Height, Weight = BmiModel.Weight, Id = BmiModel.Id, Date = BmiModel.Date, RowVersion = BmiModel.RowVersion, UserId = User.Identity?.Name ?? String.Empty});
+        // _command.Edit(new BmiEditRequestDto{Height = BmiModel.Height, Weight = BmiModel.Weight, Id = BmiModel.Id, Date = BmiModel.Date, RowVersion = BmiModel.RowVersion, UserId = User.Identity?.Name ?? String.Empty});
 
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

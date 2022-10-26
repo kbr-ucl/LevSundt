@@ -1,10 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-LevSundt.WebApp-8FF7586F-2A9D-4974-9F73-8061C52D722B</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,16 +22,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LevSundt.Bmi.Application\LevSundt.Bmi.Application.csproj" />
-    <ProjectReference Include="..\LevSundt.Bmi.Domain\LevSundt.Bmi.Domain.csproj" />
-    <ProjectReference Include="..\LevSundt.Bmi.Infrastructor\LevSundt.Bmi.Infrastructor.csproj" />
-    <ProjectReference Include="..\LevSundt.SqlServerContext.Migrations\LevSundt.SqlServerContext.Migrations.csproj" />
-    <ProjectReference Include="..\LevSundt.SqlServerContext\LevSundt.SqlServerContext.csproj" />
-    <ProjectReference Include="..\LevSundt.WebApp.UserContext.Migrations\LevSundt.WebApp.UserContext.Migrations.csproj" />
     <ProjectReference Include="..\LevSundt.WebApp.UserContext\LevSundt.WebApp.UserContext.csproj" />
   </ItemGroup>
+
 
 </Project>
