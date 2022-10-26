@@ -1,8 +1,9 @@
-﻿using LevSundt.Bmi.Application.Commands;
+﻿using System.Net.Mime;
+using LevSundt.Bmi.Application.Commands;
 using LevSundt.Bmi.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-6.0
 
 namespace LevSundt.Api.Controllers;
 
@@ -11,35 +12,73 @@ namespace LevSundt.Api.Controllers;
 public class BmiController : ControllerBase
 {
     private readonly IBmiGetAllQuery _bmiGetAllQuery;
+    private readonly IBmiGetQuery _bmiGetQuery;
     private readonly ICreateBmiCommand _createBmiCommand;
     private readonly IEditBmiCommand _editBmiCommand;
 
-    public BmiController(IBmiGetAllQuery bmiGetAllQuery, ICreateBmiCommand createBmiCommand,
+    public BmiController(IBmiGetAllQuery bmiGetAllQuery, IBmiGetQuery bmiGetQuery, ICreateBmiCommand createBmiCommand,
         IEditBmiCommand editBmiCommand)
     {
         _bmiGetAllQuery = bmiGetAllQuery;
+        _bmiGetQuery = bmiGetQuery;
         _createBmiCommand = createBmiCommand;
         _editBmiCommand = editBmiCommand;
     }
 
-    // GET api/<BmiController>/5
     [HttpGet("{userId}")]
-    public IEnumerable<BmiQueryResultDto> Get(string userId)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<IEnumerable<BmiQueryResultDto>> Get(string userId)
     {
-        return _bmiGetAllQuery.GetAll(userId);
+        var result = _bmiGetAllQuery.GetAll(userId).ToList();
+        if (!result.Any())
+            return NotFound();
+
+        return result.ToList();
     }
 
-    // POST api/<BmiController>
+    [HttpGet("{id}/{userId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<BmiQueryResultDto> Get(int id, string userId)
+    {
+        var result = _bmiGetQuery.Get(id, userId);
+        return result;
+    }
+
     [HttpPost]
-    public void Post([FromBody] BmiCreateRequestDto request)
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult Post(BmiCreateRequestDto request)
     {
-        _createBmiCommand.Create(request);
+        try
+        {
+            _createBmiCommand.Create(request);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+        
     }
 
-    // PUT api/<BmiController>/5
     [HttpPut]
-    public void Put([FromBody] BmiEditRequestDto request)
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult Put([FromBody] BmiEditRequestDto request)
     {
-        _editBmiCommand.Edit(request);
+        try
+        {
+            _editBmiCommand.Edit(request);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+        
     }
 }

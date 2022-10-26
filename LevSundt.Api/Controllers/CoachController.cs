@@ -1,7 +1,7 @@
 ﻿using LevSundt.Bmi.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-6.0
 
 namespace LevSundt.Api.Controllers
 {
@@ -16,42 +16,16 @@ namespace LevSundt.Api.Controllers
             _bmiGetAllQuery = bmiGetAllQuery;
         }
 
-        //// GET: api/<CoachController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET api/<CoachController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST api/<CoachController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT api/<CoachController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<CoachController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
-
         [HttpGet("User/{userId}")]
-        public IEnumerable<BmiQueryResultDto> Get(string userId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<BmiQueryResultDto>> Get(string userId)
         {
-            return _bmiGetAllQuery.GetAll(userId);
+            var result = _bmiGetAllQuery.GetAll(userId).ToList();
+            if (!result.Any())
+                return NotFound();
+
+            return result.ToList();
         }
     }
 }
