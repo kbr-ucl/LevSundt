@@ -8,6 +8,9 @@ services:
     build:
       context: .
       dockerfile: ./LevSundt.WebApp/Dockerfile
+    depends_on:
+      - db
+      - levsundt.api
 
 
   levsundt.api:
@@ -15,4 +18,15 @@ services:
     build:
       context: .
       dockerfile: ./LevSundt.Api/Dockerfile
-
+    depends_on:
+      - db
+  
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    ports:
+      - "1433:1433"
+    environment:
+        SA_PASSWORD: "Your_password123"
+        ACCEPT_EULA: "Y"
+    volumes:
+      - C:\DockerVolumes\sqlserver:/var/opt/mssql/data 
