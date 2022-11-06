@@ -21,12 +21,13 @@ services:
     depends_on:
       - db
   
+#https://github.com/Microsoft/mssql-docker/issues/283 change password
   db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     ports:
-      - "1433:1433"
+      - "14330:1433"
     environment:
-        SA_PASSWORD: "Your_password123"
+        MSSQL_SA_PASSWORD: "sa"
         ACCEPT_EULA: "Y"
     volumes:
       - C:\DockerVolumes\sqlserver:/var/opt/mssql/data 
