@@ -8,26 +8,43 @@ services:
     build:
       context: .
       dockerfile: ./LevSundt.WebApp/Dockerfile
+    environment:
+         "ASPNETCORE_ENVIRONMENT": "Development"
+         "ConnectionStrings:WebAppUserDbConnection": "Server=db;Database=LevSundtUsers;user id=web; password=webPassw0rd!; MultipleActiveResultSets=true;"
+         "LevSundtBaseUrl" : "http://levsundt.api"
     depends_on:
       - db
       - levsundt.api
 
 
   levsundt.api:
+    ports:
+      - "32330:80"
     image: ${DOCKER_REGISTRY-}levsundtapi
     build:
       context: .
       dockerfile: ./LevSundt.Api/Dockerfile
+    environment:
+         "ASPNETCORE_ENVIRONMENT": "Development"
+         "ConnectionStrings:LevSundtDbConnection": "Server=db;Database=LevSundtDomain; user id=api; password=apiPassw0rd!; MultipleActiveResultSets=true"
+
     depends_on:
       - db
   
 #https://github.com/Microsoft/mssql-docker/issues/283 change password
   db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
+    user: root
     ports:
       - "14330:1433"
     environment:
-        MSSQL_SA_PASSWORD: "sa"
+        MSSQL_SA_PASSWORD: "SqlPassw0rd!"
         ACCEPT_EULA: "Y"
+
     volumes:
-      - C:\DockerVolumes\sqlserver:/var/opt/mssql/data 
+      - C:\DockerVolumes\sqlserver\data:/var/opt/mssql/data
+      - C:\DockerVolumes\sqlserver\log:/var/opt/mssql/log
+      - C:\DockerVolumes\sqlserver\secrets:/var/opt/mssql/secrets 
+
+    container_name: sql2019
+    hostname: sql1

@@ -9,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Add-Migration InitialMigration -Context WebAppUserDbContext -Project LevSundt.WebApp.UserContext.Migrations
 // Update-Database -Context WebAppUserDbContext
+// Docker
+builder.Configuration.AddEnvironmentVariables();
+Console.WriteLine(builder.Configuration.GetConnectionString("WebAppUserDbConnection"));
+
 var connectionString = builder.Configuration.GetConnectionString("WebAppUserDbConnection");
 builder.Services.AddDbContext<WebAppUserDbContext>(options =>
     options.UseSqlServer(connectionString,
@@ -43,21 +47,6 @@ builder.Services.AddHttpClient<ILevSundtService, LevSundtService>(client =>
     client.BaseAddress = new Uri(builder.Configuration["LevSundtBaseUrl"]);
 });
 
-//// Clean Architecture
-//builder.Services.AddScoped<ICreateBmiCommand, CreateBmiCommand>();
-//builder.Services.AddScoped<IBmiRepository, BmiRepository>();
-//builder.Services.AddScoped<IBmiGetAllQuery, BmiGetAllQuery>();
-//builder.Services.AddScoped<IEditBmiCommand, EditBmiCommand>();
-//builder.Services.AddScoped<IBmiGetQuery, BmiGetQuery>();
-//builder.Services.AddScoped<IBmiDomainService, BmiDomainService>();
-
-//// Database
-//// Add-Migration InitialMigration -Context LevSundtContext -Project LevSundt.SqlServerContext.Migrations
-//// Update-Database -Context LevSundtContext
-//builder.Services.AddDbContext<LevSundtContext>(
-//    options => 
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("LevSundtDbConnection"),
-//    x=> x.MigrationsAssembly("LevSundt.SqlServerContext.Migrations")));
 
 var app = builder.Build();
 

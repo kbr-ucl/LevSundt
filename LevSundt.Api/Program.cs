@@ -26,9 +26,15 @@ builder.Services.AddScoped<IEditBmiCommand, EditBmiCommand>();
 builder.Services.AddScoped<IBmiGetQuery, BmiGetQuery>();
 builder.Services.AddScoped<IBmiDomainService, BmiDomainService>();
 
+// Docker
+builder.Configuration.AddEnvironmentVariables();
+
+Console.WriteLine(builder.Configuration.GetConnectionString("LevSundtDbConnection"));
 // Database
 // Add-Migration InitialMigration -Context LevSundtContext -Project LevSundt.SqlServerContext.Migrations
 // Update-Database -Context LevSundtContext
+// Script-Migration -Context LevSundtContext
+
 builder.Services.AddDbContext<LevSundtContext>(
     options => 
         options.UseSqlServer(builder.Configuration.GetConnectionString("LevSundtDbConnection"),
@@ -38,13 +44,14 @@ builder.Services.AddDbContext<LevSundtContext>(
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
+
+
+}
 
 app.UseHttpsRedirection();
 
