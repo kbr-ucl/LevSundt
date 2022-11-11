@@ -7,8 +7,11 @@
     <div class="col-md-6">
         <form method="post">
             <div class="form-group">
+                
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                 <label asp-for="BmiModel.Height"></label>
-                <input asp-for="BmiModel.Height" class="form-control" />
+                <input asp-for="BmiModel.Height" class="form-control"/>
                 <span asp-validation-for="BmiModel.Height" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -6,6 +6,6 @@ public interface ILevSundtService
 {
     Task Create(BmiCreateRequestDto dto);
     Task Edit(BmiEditRequestDto bmiEditRequestDto);
-    Task<BmiQueryResultDto> Get(int id, string identityName);
-    Task<IEnumerable<BmiQueryResultDto>> GetAll(string identityName);
+    Task<BmiQueryResultDto?> Get(int id, string identityName);
+    Task<IEnumerable<BmiQueryResultDto>?> GetAll(string identityName);
 }

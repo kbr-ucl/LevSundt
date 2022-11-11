@@ -19,7 +19,7 @@ public class IndexModel : PageModel
     {
         var businessModel = await _levSundtService.GetAll(User.Identity?.Name ?? string.Empty);
 
-        businessModel.ToList().ForEach(dto => IndexViewModel.Add(new BmiIndexViewModel
+        businessModel?.ToList().ForEach(dto => IndexViewModel.Add(new BmiIndexViewModel
             {Bmi = dto.Bmi, Weight = dto.Weight, Height = dto.Height, Id = dto.Id, Date = dto.Date}));
     }
 }

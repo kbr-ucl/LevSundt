@@ -6,9 +6,12 @@
 <div class="row">
     <div class="col-md-6">
         <form method="post">
-            <input type="hidden" asp-for="BmiModel.Id" class="form-control" />
-            <input type="hidden" asp-for="BmiModel.Date" class="form-control" />
-            <input type="hidden" asp-for="BmiModel.RowVersion" class="form-control" />
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="BmiModel.Id" class="form-control"/>
+            <input type="hidden" asp-for="BmiModel.Date" class="form-control"/>
+            <input type="hidden" asp-for="BmiModel.RowVersion" class="form-control"/>
             <div class="form-group">
                 <label asp-for="BmiModel.Height"></label>
                 <input asp-for="BmiModel.Height" class="form-control"/>

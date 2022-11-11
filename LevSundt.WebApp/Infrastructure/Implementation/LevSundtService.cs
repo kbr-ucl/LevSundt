@@ -14,20 +14,30 @@ public class LevSundtService : ILevSundtService
 
     async Task ILevSundtService.Create(BmiCreateRequestDto bmiCreateRequestDto)
     {
-        await _httpClient.PostAsJsonAsync("api/Bmi", bmiCreateRequestDto);
+        var response = await _httpClient.PostAsJsonAsync("api/Bmi", bmiCreateRequestDto);
+
+        if(response.IsSuccessStatusCode)  return;
+        
+        var message = await response.Content.ReadAsStringAsync();
+        throw new Exception(message);
     }
 
     async Task ILevSundtService.Edit(BmiEditRequestDto bmiEditRequestDto)
     {
-        await _httpClient.PutAsJsonAsync("api/Bmi", bmiEditRequestDto);
+        var response = await _httpClient.PutAsJsonAsync("api/Bmi", bmiEditRequestDto);
+
+        if(response.IsSuccessStatusCode) return;
+
+        var messages = await response.Content.ReadAsStringAsync();
+        throw new Exception(messages);
     }
 
-    async Task<BmiQueryResultDto> ILevSundtService.Get(int id, string userId)
+    async Task<BmiQueryResultDto?> ILevSundtService.Get(int id, string userId)
     {
         return await _httpClient.GetFromJsonAsync<BmiQueryResultDto>($"api/Bmi/{id}/{userId}");
     }
 
-    async Task<IEnumerable<BmiQueryResultDto>> ILevSundtService.GetAll(string userId)
+    async Task<IEnumerable<BmiQueryResultDto>?> ILevSundtService.GetAll(string userId)
     {
         return await _httpClient.GetFromJsonAsync<IEnumerable<BmiQueryResultDto>>($"api/Bmi/{userId}");
     }

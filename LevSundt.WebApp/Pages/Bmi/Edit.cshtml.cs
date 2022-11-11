@@ -21,6 +21,8 @@ public class EditModel : PageModel
         if (id == null) return NotFound();
 
         var dto = await _levSundtService.Get(id.Value, User.Identity?.Name ?? string.Empty);
+        
+        if (dto == null) return NotFound();
 
         BmiModel = new BmiEditViewModel
             {Height = dto.Height, Weight = dto.Weight, Id = dto.Id, Date = dto.Date, RowVersion = dto.RowVersion};
@@ -32,11 +34,20 @@ public class EditModel : PageModel
     {
         if (!ModelState.IsValid) return Page();
 
-        await _levSundtService.Edit(new BmiEditRequestDto
+        try
         {
-            Height = BmiModel.Height, Weight = BmiModel.Weight, Id = BmiModel.Id, Date = BmiModel.Date,
-            RowVersion = BmiModel.RowVersion, UserId = User.Identity?.Name ?? string.Empty
-        });
+            await _levSundtService.Edit(new BmiEditRequestDto
+            {
+                Height = BmiModel.Height, Weight = BmiModel.Weight, Id = BmiModel.Id, Date = BmiModel.Date,
+                RowVersion = BmiModel.RowVersion, UserId = User.Identity?.Name ?? string.Empty
+            });
+        }
+        catch (Exception e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return Page();
+        }
+
 
         return RedirectToPage("./Index");
     }

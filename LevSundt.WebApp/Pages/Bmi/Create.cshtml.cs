@@ -22,13 +22,23 @@ public class CreateModel : PageModel
 
     public async Task<IActionResult> OnPost()
     {
-        if (!ModelState.IsValid) return Page();
+        if (!ModelState.IsValid || !BmiModel.Height.HasValue || !BmiModel.Weight.HasValue) return Page();
 
         var dto = new BmiCreateRequestDto
         {
             Height = BmiModel.Height.Value, Weight = BmiModel.Weight.Value, UserId = User.Identity?.Name ?? string.Empty
         };
-        await _levSundtService.Create(dto);
+
+        try
+        {
+            await _levSundtService.Create(dto);
+        }
+        catch (Exception e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return Page();
+        }
+        
 
         return new RedirectToPageResult("/Bmi/Index");
     }

@@ -23,7 +23,7 @@ public class DetailsModel : PageModel
 
         var businessModel = await _levSundtService.GetAll(userId);
 
-        businessModel.OrderBy(a => a.Date).ToList().ForEach(dto => DetailsViewModel.Add(new CoachDetailsViewModel
+        businessModel?.OrderBy(a => a.Date).ToList().ForEach(dto => DetailsViewModel.Add(new CoachDetailsViewModel
             {Bmi = dto.Bmi, Weight = dto.Weight, Height = dto.Height, Id = dto.Id, Date = dto.Date}));
 
         UserName = userId;
