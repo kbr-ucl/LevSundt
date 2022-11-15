@@ -34,6 +34,7 @@ Console.WriteLine(builder.Configuration.GetConnectionString("LevSundtDbConnectio
 // Add-Migration InitialMigration -Context LevSundtContext -Project LevSundt.SqlServerContext.Migrations
 // Update-Database -Context LevSundtContext
 // Script-Migration -Context LevSundtContext
+// Applying Entity Framework Migrations to a Docker Container: https://codebuckets.com/2020/08/14/applying-entity-framework-migrations-to-a-docker-container/
 
 builder.Services.AddDbContext<LevSundtContext>(
     options => 
