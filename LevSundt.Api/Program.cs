@@ -6,6 +6,7 @@ using LevSundt.Bmi.Application.Repositories;
 using LevSundt.Bmi.Domain.DomainServices;
 using LevSundt.Bmi.Infrastructor.DomainServices;
 using LevSundt.Bmi.Infrastructor.Repositories;
+using LevSundt.Crosscut.TransactionHandling;
 using LevSundt.SqlServerContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,14 @@ builder.Services.AddDbContext<LevSundtContext>(
     options => 
         options.UseSqlServer(builder.Configuration.GetConnectionString("LevSundtDbConnection"),
             x=> x.MigrationsAssembly("LevSundt.SqlServerContext.Migrations")));
+
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(p =>
+{
+    var db = p.GetService<LevSundtContext>();
+    return new UnitOfWork(db);
+});
+
 
 
 var app = builder.Build();
