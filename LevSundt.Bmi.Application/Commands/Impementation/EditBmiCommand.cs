@@ -17,9 +17,6 @@ public class EditBmiCommand : IEditBmiCommand
     }
     void IEditBmiCommand.Edit(BmiEditRequestDto requestDto)
     {
-
-
-
         try
         {
             _uow.BeginTransaction(IsolationLevel.Serializable);
